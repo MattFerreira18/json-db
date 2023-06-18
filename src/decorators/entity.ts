@@ -1,4 +1,4 @@
-import FieldWrapper from './field';
+import FieldWrapper from './attribute';
 
 function getMethodsOfClassInstance(instance: GenericClass) {
   return Object.getOwnPropertyNames(instance.prototype);

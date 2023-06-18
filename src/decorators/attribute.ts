@@ -1,28 +1,28 @@
 // TODO rename to @Attribute()
 type AttributeTypes = 'string' | 'int' | 'float' | 'bool';
 
-interface CommonFieldOptions {
+interface CommonAttributeOptions {
   type: AttributeTypes;
   required?: boolean;
 }
 
-interface FieldKeyOptions {
+interface AttributeKeyOptions {
   type: AttributeTypes;
   isKey?: boolean;
 }
 
-interface FieldReferenceOptions {
+interface AttributeReferenceOptions {
   type: AttributeTypes;
   isReference?: boolean;
 }
 
-interface FieldForeignOptions {
+interface AttributeForeignOptions {
   type: AttributeTypes;
   required?: boolean;
   references?: string;
 }
 
-type FieldOptions = CommonFieldOptions & FieldKeyOptions & FieldReferenceOptions & FieldForeignOptions;
+type AttributeOptions = CommonAttributeOptions & AttributeKeyOptions & AttributeReferenceOptions & AttributeForeignOptions;
 
 type Target<This, Args extends unknown[], Return> = (this: This, ...args: Args) => Return;
 
@@ -32,12 +32,12 @@ type DecoratorWrapper<This, Args extends unknown[], Return> = (
 
 function defineMetadata<This, Args extends unknown[], Return>(
   target: Target<This, Args, Return>,
-  options: FieldOptions,
+  options: AttributeOptions,
 ) {
   // Object.defineProperty(target, 'test', { value: options });
 }
 
-function decorator(options: FieldOptions) {
+function decorator(options: AttributeOptions) {
   function decoratorWrapper<This, Args extends unknown[], Return>(
     target: Target<This, Args, Return>,
     // ctx: ClassGetterDecoratorContext<This, Return>
@@ -60,16 +60,16 @@ function decorator(options: FieldOptions) {
 
 // change return-type
 // eslint-disable-next-line @typescript-eslint/ban-types
-function FieldWrapper(options: CommonFieldOptions): Function;
+function AttributeWrapper(options: CommonAttributeOptions): Function;
 // eslint-disable-next-line @typescript-eslint/ban-types
-function FieldWrapper(options: FieldKeyOptions): Function;
+function AttributeWrapper(options: AttributeKeyOptions): Function;
 // eslint-disable-next-line @typescript-eslint/ban-types
-function FieldWrapper(options: FieldReferenceOptions): Function;
+function AttributeWrapper(options: AttributeReferenceOptions): Function;
 // eslint-disable-next-line @typescript-eslint/ban-types
-function FieldWrapper(options: FieldForeignOptions): Function;
+function AttributeWrapper(options: AttributeForeignOptions): Function;
 
 // improve code-readability
-function FieldWrapper(options: FieldOptions) {
+function AttributeWrapper(options: AttributeOptions) {
   const { type, isKey, isReference, references, required } = options;
 
   if (isKey) {
@@ -89,4 +89,4 @@ function FieldWrapper(options: FieldOptions) {
 
 
 
-export default FieldWrapper;
+export default AttributeWrapper;
