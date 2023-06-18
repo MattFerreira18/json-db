@@ -1,17 +1,4 @@
 // TODO rename to @Attribute()
-/**
- * use-case
- *
- * @Field({
- *  type: 'string' // can be one of: string, int, float, bool and base64
- *  required: true,
- *  key: true, // should be primary-key
- *  reference: false // should be a foreign-key
- * })
- * public get attr() {
- *  return this._attr;
- * }
- */
 type AttributeTypes = 'string' | 'int' | 'float' | 'bool';
 
 interface CommonFieldOptions {
